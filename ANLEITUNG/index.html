@@ -72,13 +72,13 @@ th { background-color: #eee; }
 </head>
 
 <body>
-  <h1>Seitennummerierung der Produkte <span class="smaller">für Zen Cart v1.5.6 deutsch</span></h1>
-  <h3>Version 2.1.0 von lat9 und torvista</h3>
-  <h3>Copyright &copy; 2010-2020 <a href="https://vinosdefrutastropicales.com" target="_blank">Vinos de Frutas Tropicales</a>. Alle Rechte vorbehalten.</h3>
+  <h1>Seitennummerierung der Produkte <span class="smaller">für Zen Cart v1.5.6 (und höher)</span></h1>
+  <h3>Version 2.1.1 von lat9 und torvista</h3>
+  <h3>Copyright &copy; 2010-2021 <a href="https://vinosdefrutastropicales.com" target="_blank">Vinos de Frutas Tropicales</a>. Alle Rechte vorbehalten.</h3>
   <h4>Deutsche Übersetzung des Moduls: Klartexter</h4>
   <hr />
-  
-  <p><strong>Hinweis:</strong> Dieses Modul ist nur für Zen Cart 1.5.6 deutsch geeignet</p>
+  <p>Aktuelles Support-Thema im Zen Cart Forum: <a href="https://www.zen-cart.com/forum/showthread.php?t=169227" target="_blank">https://www.zen-cart.com/forum/showthread.php?t=169227</a></p>
+  <p><strong>Hinweis:</strong> Wenn Sie eine Zen Cart Version <em>vor</em> 1.5.6 verwenden, benutzen Sie bitte eine frühere 1.x.x Version von <em>Products' Pagination</em>.</p>
   
   <div class="tab-container" id="outer-container">
     <ul class="etabs">
@@ -137,7 +137,7 @@ th { background-color: #eee; }
                 <li>Kopieren Sie die Dateien des Plugins in das Dateisystem Ihres Shops:<ol>
                   <li>includes/auto_loaders/config.pagination.php</li>
                   <li>includes/classes/pp_split_page_results.php</li>
-                  <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(Mitgeliefert wird die 1.5.6e Version dieser Datei, Änderungen sind kommentiert).</span></li>
+                  <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(This is the zc157 version of the file, with 2 marked change-sections).</span></li>
                   <li>includes/classes/observers/class.products_pagination_observer.php</li>
                   <li>includes/extra_cart_actions/pagination_actions.php</li>
                   <li>includes/functions/extra_functions/products_pagination_functions.php</li>
@@ -204,7 +204,7 @@ th { background-color: #eee; }
               <ol>
                 <li>includes/auto_loaders/config.pagination.php <span class="smaller">(Added in v2.0.0)</span></li>
                 <li>includes/classes/pp_split_page_results.php <span class="smaller">(Added in v2.0.0)</span></li>
-                <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(1.5.6e Version der Datei, Änderungen sind kommentiert).</span></li>
+                <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(This is the zc157 version of the file, with 2 marked change-sections).</span></li>
                 <li>includes/classes/observers/class.products_pagination_observer.php</li>
                 <li>includes/extra_cart_actions/pagination_actions.php</li>
                 <li>includes/functions/extra_functions/products_pagination_functions.php</li>
@@ -228,6 +228,15 @@ th { background-color: #eee; }
             
             <div id="changes">
               <ul>
+                <li>v2.1.1, 2021-03-28 (torvista and lat9):<ul>
+                    <li>BUGFIX: Ensure unique form-name on multi-page listings with no top/bottom submit button.</li>
+                    <li>BUGFIX: Correct MySQL error on <code>account_history</code> page for zc157 and later.</li>
+                    <li>The following files were changed:<ol>
+                        <li>/includes/classes/pp_split_page_results.php</li>
+                        <li><span class="corefile">/includes/classes/split_pages_results.php</span>  <span class="smaller">(Now using the zc157c version as the change-basis)</span></li>
+                        <li>/YOUR_ADMIN/includes/init_includes/init_product_pagination_admin.php</li>
+                    </ol></li>
+                </ul></li>
                 <li>v2.1.0, 2020-06-14 (torvista and lat9):<ul>
                     <li>BUGFIX: Correct various PHP notices and processing errors in the plugin's observer-class.</li>
                     <li>BUGFIX: Use correct variable name in the plugin's split-page class.</li>
@@ -237,7 +246,7 @@ th { background-color: #eee; }
                     <li>The following files were changed:<ol>
                         <li>includes/auto_loaders/config.pagination.php</li>
                         <li>includes/classes/pp_split_page_results.php</li>
-                        <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(1.5.6e Version der Datei, Änderungen sind kommentiert).</span></li>
+                        <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(Now using the zc157 version as the change-basis)</span></li>
                         <li>includes/classes/observers/class.products_pagination_observer.php</li>
                         <li>includes/languages/english/extra_definitions/products_pagination.php</li>
                         <li><span class="template">/includes/modules/DEIN_TEMPLATE/prod_prev_next.php</span></li>
