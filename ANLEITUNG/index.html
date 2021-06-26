@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="../vinos_favicon.ico" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+<title>Products' Pagination</title>
+
+<style type="text/css">
+<!--
+a, a:active, a:visited { color: #006666; text-decoration: none; }
+a:hover { color:#00CC99; text-decoration: underline; }
+BODY, P, H1, H2, H3, H4, H5, H6, LI, TD, DD, DT, pre, code, img, table, #outer-container {
+  font-family: Roboto, Verdana, AvantGarde, Tahoma, Arial, sans-serif;
+  font-size: 12pt;
+  color: black;
+  padding: 0px;
+  margin: 20px;
+  line-height: 1.75em;
+}
+H1, H2, H3, H4 { font-weight: bold; }
+h1 { font-size: 20px; }
+h2 { font-size: 16px; }
+fieldset { padding: 10px; margin-top: 5px; }
+legend { background-color: #eee; border: 1px solid #666; padding: 3px; border-radius: 4px; }
+pre, code { padding-left: 25px; font-family: Courier; font-size: 12pt; }
+pre.no-pad, code.no-pad { padding: 0; margin: 0; }
+ol li, ul li, ul li ul li { margin: 5px 0; padding: 0; }
+img { margin: 0 20px; float: left; border: 1px solid #666; }
+img.wide { width: 95%; float: none; margin: 0 2.5%; }
+textarea { width: 100%; }
+.corefile { color: red; }
+.template { color: green; }
+.forward { float: right; }
+.back { float: back; }
+.clearBoth { clear: both; }
+#buttons, #fa-buttons { margin-left: 20px; width: 300px; }
+#fa-buttons { margin-top: 5px; }
+table, td, th { border: 1px solid black; border-collapse: collapse; }
+td, th { padding: 5px; }
+th { background-color: #eee; }
+.smaller { font-size: smaller; }
+.left-pane { width: 49%; float: left; }
+.right-pane { width: 49%; float: right; }
+.multi-list { width: 32%; float: left; }
+.removed { text-decoration: line-through; }
+.added { color: blue; }
+.smaller { font-size: smaller; }
+
+.etabs { margin: 0; padding: 0; }
+.tab { display: inline-block; zoom:1; *display:inline; background: #eee; border: solid 1px #999; border-bottom: none; border-radius: 4px 4px 0 0; margin: 0; }
+.tab a { font-size: 14px; line-height: 2em; display: block; padding: 0 10px; outline: none; }
+.tab a:hover { text-decoration: underline; }
+.tab.active { background: #fff; padding-top: 6px; position: relative; top: 1px; border-color: #666; }
+.tab a.active { font-weight: bold; }
+.tab-container .panel-container { background: #fff; border: solid #666 1px; padding: 10px; border-radius: 0 4px 4px 4px; }
+.panel-container { margin-bottom: 10px; }
+@media (max-width: 979px) {
+  .multi-list { width: 95%; float: none; margin: 0 auto; }
+}
+-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+<script src="../jquery-1.7.1.min.js"></script> 
+<script src="../jquery.easytabs.min.js"></script>
+<script>
+  $(document).ready( function() {
+      $('#tab-container').easytabs();
+  });
+</script>
+</head>
+
+<body>
+  <h1>Seitennummerierung der Produkte <span class="smaller">für Zen Cart v1.5.6 deutsch</span></h1>
+  <h3>Version 2.1.0 von lat9 und torvista</h3>
+  <h3>Copyright &copy; 2010-2020 <a href="https://vinosdefrutastropicales.com" target="_blank">Vinos de Frutas Tropicales</a>. Alle Rechte vorbehalten.</h3>
+  <h4>Deutsche Übersetzung des Moduls: Klartexter</h4>
+  <hr />
+  
+  <p><strong>Hinweis:</strong> Dieses Modul ist nur für Zen Cart 1.5.6 deutsch geeignet</p>
+  
+  <div class="tab-container" id="outer-container">
+    <ul class="etabs">
+      <li class="tab"><a href="#overview">Übersicht</a></li>
+      <li class="tab"><a href="#installation">Installation und Updates</a></li>
+      <li class="tab"><a href="#configure">Konfiguration</a></li>
+      <li class="tab"><a href="#version">Änderungsgeschichte</a></li>
+    </ul>
+    
+    <div class="panel-container">
+    
+      <div id="overview">
+        <p>Dieses Plugin ersetzt die standardmäßige vorherige/nächste Navigation für die Produktinformationsseiten Ihres Shops:</p>
+        <ul>
+          <li>document_general_info</li>
+          <li>document_product_info</li>
+          <li>product_free_shipping_info</li>
+          <li>product_info</li>
+          <li>product_music_info</li>
+        </ul>
+        <p>und optional (über die Admin-Konfiguration) die vorherige/nächste Navigation für diese anderen Seiten in Ihrem Shop:</p>
+        <ul>
+          <li>account_history</li>
+          <li>advanced_search_result</li>
+          <li>featured_products</li>
+          <li>index (a.k.a. the product listing page)</li>
+          <li>product_reviews</li>
+          <li>products_all</li>
+          <li>products_new</li>
+          <li>reviews</li>
+          <li>specials</li>
+        </ul>
+        <p>Die aktualisierte Anzeige sieht ähnlich aus wie <a target="_blank" href="https://vinosdefrutastropicales.com/demo/index.php?main_page=product_info&cPath=66&products_id=34">das</a>.  Links zu den ersten und letzten Produkten in der Kategorie (oder Seitengruppen für die &quot;anderen&quot; Seiten) werden immer angezeigt, und Sie steuern die maximale Anzahl der anzuzeigenden Links.  Wenn Sie den Mauszeiger über einen Link auf einer Produktinformationsseite bewegen, wird der Name des mit diesem Link verbundenen Produkts vom Browser angezeigt.</p>
+        <p>Es gibt optionale (Standard: <em>false</em>) Steuerelemente in der <em>Konfiguration-&gt;Produkte Paginierung</em> Ihres Admins, mit denen Sie ein Seitenauswahl-Dropdown anzeigen können, bei dem Ihre Besucher wählen können, zu welcher Seite der Anzeige sie als nächstes wechseln möchten und/oder ein Artikelanzahl-Dropdown, bei dem Ihre Besucher wählen können, wie viele Artikel pro Anzeigeseite angezeigt werden sollen.  Diese Steuerelemente erscheinen <em>nur</em> auf der Seite &quot;Andere zu verlinkende Seiten&quot;.</p>
+        <p>Ab v2.0.0 steuern Sie auch, ob die Paginierungs-Links des Plugins aktiv sind, wenn Ihre Seite von einem <em>mobilen</em> Gerät betrachtet wird.  Um dies zu ermöglichen, nutzt das Plugin die <b><i>vorhandene</i></b> Datei <code class="no-pad">/includes/classes/Mobile_Detect.php</code> und kennt auch die <code class="no-pad">LayoutType</code>-Behandlung, die das <em>responsive_classic</em> Template von Zen Cart 1.5.6 bietet.</p>
+      </div>
+    
+      <div id="installation">
+        <p>In diesem Abschnitt wird die Vorgehensweise zum Installieren/Aktualisieren oder Entfernen des Plugins für Ihren Zen Cart beschrieben.</p>
+
+        <div class="tab-container" id="inner-container2">
+          <ul class="etabs">
+            <li class="tab"><a href="#install">Installation und Updates</a></li>
+            <li class="tab"><a href="#upgrade">Upgrading von v1.x.x</a></li>
+            <li class="tab"><a href="#remove">Uninstall</a></li>
+          </ul>
+          <div class="panel-container">
+            <div id="install">
+              <p>Es gibt eine <span class="corefile">Kerndatei, die überschrieben wird</span> und es gibt <span class="template">Template-Überschreibungen</span>; Sie sollten <strong>immer</strong> die Datenbank und die Dateien Ihres Warenkorbs sichern, bevor Sie Änderungen vornehmen.</p>
+              <ol type="A">
+                <li>Benennen Sie den Ordner <code class="no-pad">DEIN_ADMIN</code> so um, dass er dem Namen des &quot;geheimen&quot; Admin-Ordners Ihres Shops entspricht, und die Ordner <code class="no-pad">DEIN_TEMPLATE</code> (zwei davon) so, dass er dem Namen Ihrer aktiven Vorlage entspricht:<ol>
+                  <li>includes/modules<b>/DEIN_TEMPLATE</b></li>
+                  <li>includes/templates<b>/DEIN_TEMPLATE</b></li>
+                </ol></li>
+                <li>Vergleichen Sie die <span class="corefile">core-</span> und <span class="template">template-</span>Überschreibungen des Plugins mit allen bereits vorhandenen Änderungen, die Sie an diesen Dateien vorgenommen haben.</li>
+                <li>Kopieren Sie die Dateien des Plugins in das Dateisystem Ihres Shops:<ol>
+                  <li>includes/auto_loaders/config.pagination.php</li>
+                  <li>includes/classes/pp_split_page_results.php</li>
+                  <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(Mitgeliefert wird die 1.5.6e Version dieser Datei, Änderungen sind kommentiert).</span></li>
+                  <li>includes/classes/observers/class.products_pagination_observer.php</li>
+                  <li>includes/extra_cart_actions/pagination_actions.php</li>
+                  <li>includes/functions/extra_functions/products_pagination_functions.php</li>
+                  <li>includes/languages/english/extra_definitions/products_pagination.php</li>
+                  <li>includes/languages/german/extra_definitions/products_pagination.php</li>
+                  <li>includes/modules/pp_product_next_prev.php</li>
+                  <li><span class="template">/includes/modules/DEIN_TEMPLATE/product_prev_next.php</span></li>
+                  <li>includes/templates/template_default/templates/tpl_pp_products_next_previous.php</li>
+                  <li>includes/templates/DEIN_TEMPLATE/css/stylesheet_prod_pagination.css</li>
+                  <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_index_product_list.php</span></li>
+                  <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_modules_listing_display_order.php</span></li>
+                  <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_products_next_previous.php</span></li>
+                  <li>DEIN_ADMIN/includes/auto_loaders/config.products_pagination_admin.php</li>
+                  <li>DEIN_ADMIN/includes/init_includes/init_product_pagination_admin.php</li>
+                  <li>DEIN_ADMIN/includes/languages/english/extra_definitions/products_pagination.php</li>
+				  <li>DEIN_ADMIN/includes/languages/german/extra_definitions/products_pagination.php</li>
+                </ol></li>
+                <li>Melden Sie sich in Ihrem Zen Cart-Admin an.  Der Auto-Installer des Plugins wird ausgeführt und erstellt die <em>Configuration-&gt;Product Pagination</em>-Einstellungen.</li>
+              </ol>
+            </div>
+             
+            <div id="upgrade">
+              <p>Das Plugin wurde ab v2.0.0 umgebaut, wobei eine der <span class="corefile">Kerndatei-Überschreibungen</span> entfernt wurde.  Wenn Sie das Plugin von v1.x.x aktualisieren, müssen Sie alle Änderungen an <code class="no-pad">/includes/init_includes/init_canonical.php</code> überprüfen (oder, für einige Versionen, <code class="no-pad">/includes/init_includes/overrides/init_canonical.php</code>.</p>
+              <p>Wenn Sie diese Datei im Ordner &quot;overrides&quot; haben, ist es <em>wahrscheinlich</em> sicher, diese Datei einfach zu entfernen und die eingebaute Verarbeitung von Zen Cart 1.5.4 oder höher übernehmen zu lassen.  Andernfalls überprüfen Sie Ihre Nicht-Overrides-Datei auf eine einzelne Hinzufügung durch das &quot;product_pagination&quot; Plugin und entfernen Sie einfach diesen Code-Block.  Die Zen Cart-Verarbeitung auf Beobachterebene übernimmt diese Änderung in v2.0.0.</p>
+            </div>
+            
+            <div id="remove">
+              <p>Löschen Sie zunächst die Dateien, die in das Dateisystem Ihrer Zen Cart-Installation kopiert wurden, und stellen Sie alle <span class="corefile">core-</span> und <span class="template">template-</span> Überschreibungen wieder her, die eventuell notwendig waren. Führen Sie dann mit <em>Tools-&gt;Run SQL Patches</em> Ihres Admins die Datei <code class="no-pad">/docs/product_pagination/uninstall/product_pagination_uninstall.sql</code> aus.</p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      
+      <div id="configure">
+        <p>Nachdem Sie die Dateien des Plugins in das Dateisystem Ihres Shops kopiert und sich in Ihre Admin-Konsole eingeloggt haben, sehen Sie eine Auswahl <em>Konfiguration-&gt;Produkte Paginierung</em>.  Innerhalb dieser Auswahl stehen Ihnen die folgenden Einstellungen zur Verfügung, mit denen Sie die Anzeige des Plugins anpassen können:</p>
+        <ol>
+          <li><b>Produkte Pagination Version</b>. Zeigt die aktuelle Version des Plugins und das Veröffentlichungsdatum an. <span class="smaller">(Hinzugefügt in v2.0.0)</span></li>
+          <li><b>Produktpaginierung aktivieren?</b>.  Verwenden Sie diese Einstellung, um die Gesamtfunktion des Plugins zu aktivieren (Standard) oder zu deaktivieren. <span class="smaller">(Hinzugefügt in v2.0.0)</span></li>
+          <li><b>Produktpaginierung aktivieren (mobil)?</b>. Verwenden Sie diese Einstellung, um die Funktion des Plugins zu aktivieren oder zu deaktivieren (Standard), wenn es von einem mobilen Gerät/Tablet angezeigt wird.  Wenn <em>deaktiviert</em>, wird die Paginierung standardmäßig auf die &quot;normale&quot; Formatierung Ihres Templates gesetzt. <span class="smaller">(Hinzugefügt in v2.0.0)</span></li>
+          <li><b>Produkte Paginierung &mdash; Maximale Links</b>.  Dieser Wert (Standard: 10) gibt die Anzahl der Produktlinks an, die ohne Paginierung angezeigt werden; z. B. erhalten Sie bei dem Standardwert, wenn eine Kategorie 10 oder weniger Produkte enthält, eine Nächste/Vorherige-Anzeige, die Auswahlen für Produkte 1 bis 10 zusammen mit den <em>Vorherigen</em> und <em>Nächsten</em> Links enthält.</li>
+          <li><b>Produkte Paginierung &mdash; Zwischengliederungen</b>.  Dieser Wert (Standard: 7) gibt die Anzahl der Produktlinks an, die angezeigt werden sollen, wenn die Paginierung &quot;eingetreten ist&quot;, d. h. wenn die Anzahl der Produkte in der aktuellen Kategorie größer ist als <em>Maximale Anzahl der Links</em>.  Bei den Standardwerten erhalten Sie, wenn die aktuelle Kategorie mehr als 10 Produkte enthält, eine Nächste/Vorherige-Anzeige, die immer die Links für das erste und letzte Produkt und die <em>Vorherige</em> und <em>Nächste</em> Links enthält, sowie bis zu 7 produktspezifische Links.  Eine Ellipse (&hellip;) wird angezeigt, wenn es einen Bruch in der Produktreihenfolge gibt.</li>
+          <li><b>Produktlisten-Link aktivieren?</b>  Dieser Wert (Standardwert: true) gibt an, ob (true) oder nicht (false) ein &quot;Produktliste anzeigen&quot; Link in der gleichen Zeile wie &quot;Produkt x von y anzeigen&quot; eingefügt werden soll.</li>
+          <li><b>Links auf anderen Seiten aktivieren?</b>  Dieser Wert (Voreinstellung: true) gibt an, ob (true) oder nicht (false) die &quot;Andere Seiten verlinken&quot; die Paginierungslinks angewendet werden.</li>
+          <li><b>Andere zu verlinkende Seiten</b>. Dieser Wert (Standard:account_history,advanced_search_result,featured_products,index,product_reviews,products_all,products_new,reviews,specials) enthält eine komma-separierte Liste von &quot;anderen&quot; Seiten, auf die die Paginierung angewendet werden soll.</li> 
+          <li><b>Seitenauswahl-Dropdown einschließen?</b>  Dieser Wert (Standard: false) gibt an, ob (true) oder nicht (false) die &quot;Andere zu verlinkende Seiten&quot; eine Dropdown-Liste enthalten wird, damit der Kunde zu einer bestimmten Seitennummer gehen kann.</li>
+          <li><b>Artikelanzahl-Dropdown einbeziehen?</b>  Dieser Wert (Standardwert: false) gibt an, ob (true) oder nicht (false) die &quot;Andere zu verlinkende Seiten&quot; eine Dropdown-Liste enthalten wird, mit der der Kunde die Anzahl der angezeigten Artikel pro Seite auswählen kann.  Die Werte werden durch das folgende Feld (&quot;Item Counts&quot;) festgelegt.</li>
+          <li><b>Artikelanzahl</b>. Dieser Wert enthält eine kommagetrennte Liste, die die Auswahlmöglichkeiten angibt, die dem Kunden angeboten werden, um die Anzahl der pro Seite angezeigten Artikel zu wählen; der Standardwert ist &quot;10,25,50,100,*&quot;, was angibt, dass der Kunde einen von 10, 25, 50, 100 oder "Alle" Artikeln wählen kann, die angezeigt werden sollen.  Wenn aktiviert, wird der kleinste numerische Wert in der Liste zum Standard-Minimum der angezeigten Artikel für alle &quot;Andere&quot; Seiten, unabhängig von anderen Admin-Einstellungen.</li>
+        </ol>
+      </div> 
+      
+      <div id="version">
+        <p>In diesem Abschnitt werden die für dieses Plugin hinzugefügten oder geänderten Dateien sowie die Änderungshistorie des Plugins angegeben.</p>
+
+        <div class="tab-container" id="inner-container3">
+          <ul class="etabs">
+            <li class="tab"><a href="#changes">Change History</a></li>
+            <li class="tab"><a href="#history">v1.x.x Change History</a></li>
+            <li class="tab"><a href="#files">File List</a></li>
+          </ul>
+          <div class="panel-container">
+            <div id="files">
+              <p>Das Plugin stellt die folgenden Dateien in seiner Distributions-Zip-Datei zur Verfügung.</p>
+              <ol>
+                <li>includes/auto_loaders/config.pagination.php <span class="smaller">(Added in v2.0.0)</span></li>
+                <li>includes/classes/pp_split_page_results.php <span class="smaller">(Added in v2.0.0)</span></li>
+                <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(1.5.6e Version der Datei, Änderungen sind kommentiert).</span></li>
+                <li>includes/classes/observers/class.products_pagination_observer.php</li>
+                <li>includes/extra_cart_actions/pagination_actions.php</li>
+                <li>includes/functions/extra_functions/products_pagination_functions.php</li>
+                <li><span class="corefile removed">/includes/init_includes/init_canonical.php</span>  <span class="smaller">(Removed from distribution in v2.0.0)</span>
+                <li><span class="removed">/includes/init_includes/init_pagination.php</span> <span class="smaller">(Removed in v2.0.0)</span></li>
+                <li>includes/languages/english/extra_definitions/products_pagination.php</li>
+                <li>includes/modules/pp_product_next_prev.php</li>
+                <li><span class="template removed">/includes/modules/DEIN_TEMPLATE/product_listing.php</span> <span class="smaller">(Removed in v2.0.0)</span></li>
+                <li><span class="template">/includes/modules/DEIN_TEMPLATE/product_prev_next.php</span></li>
+                <li><span class="removed">/includes/templates/template_default/css/stylesheet_prod_pagination.css</span> <span class="smaller">(Removed in v2.0.0)</span></li>
+                <li>includes/templates/template_default/templates/tpl_pp_products_next_previous.php <span class="smaller">(Added in v2.0.0)</span></li>
+                <li>includes/templates/DEIN_TEMPLATE/css/stylesheet_prod_pagination.css</li>
+                <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_index_product_list.php</span></li>
+                <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_modules_listing_display_order.php</span></li>
+                <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_products_next_previous.php</span></li>
+                <li>DEIN_ADMIN/includes/auto_loaders/config.products_pagination_admin.php <span class="smaller">(Added in v2.0.0)</span></li>
+                <li>DEIN_ADMIN/includes/init_includes/init_product_pagination_admin.php <span class="smaller">(Added in v2.0.0)</span></li>
+                <li>DEIN_ADMIN/includes/languages/english/extra_definitions/products_pagination.php</li>
+              </ol>
+            </div>
+            
+            <div id="changes">
+              <ul>
+                <li>v2.1.0, 2020-06-14 (torvista and lat9):<ul>
+                    <li>BUGFIX: Correct various PHP notices and processing errors in the plugin's observer-class.</li>
+                    <li>BUGFIX: Use correct variable name in the plugin's split-page class.</li>
+                    <li>BUGFIX: Move pagination HTML out of class-file to template.</li>
+                    <li>BUGFIX: (Future proofing) Use zc157 files as the core/template change-basis; add check so that the plugin can be removed without additional changes.</li>
+                    <li>CHANGE: zc157 interoperability, force the 'split_page_results.php' class to load that second time.</li>
+                    <li>The following files were changed:<ol>
+                        <li>includes/auto_loaders/config.pagination.php</li>
+                        <li>includes/classes/pp_split_page_results.php</li>
+                        <li><span class="corefile">/includes/classes/split_page_results.php</span> <span class="smaller">(1.5.6e Version der Datei, Änderungen sind kommentiert).</span></li>
+                        <li>includes/classes/observers/class.products_pagination_observer.php</li>
+                        <li>includes/languages/english/extra_definitions/products_pagination.php</li>
+                        <li><span class="template">/includes/modules/DEIN_TEMPLATE/prod_prev_next.php</span></li>
+                        <li>includes/templates/template_default/templates/tpl_pp_products_next_previous.php</li>
+                        <li><span class="template">/includes/templates/DEIN_TEMPLATE/css/stylesheet_prod_pagination.css</span></li>
+                        <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_index_product_list.php</span></li>
+                        <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_modules_listing_display_order.php</span></li>
+                        <li><span class="template">/includes/templates/DEIN_TEMPLATE/templates/tpl_products_next_previous.php</span></li>
+                    </ol></li>
+                </ul></li>
+                <li>v2.0.0, 2016-09-25:<ul>
+                  <li>Initial release as v2.0.0, for Zen Cart 1.5.5 and later, based on the like-named plugin's v1.5.0 file-set.</li>
+                </ul></li>
+              </ul>
+            </div>
+            
+            <div id="history">
+              <ul>
+                <li>v1.5.0, 2015-03-26:<ul>
+                  <li>CHANGE: Include additional classes to enable styling for various display viewport sizes.</li>
+                  <li>CHANGE: Move the init_canonical.php modification to the base init_includes directory, removing it from the init_includes/overrides directory &mdash; making it easier to upgrade.</li>
+                  <li>The following files were <span class="changed">changed</span>/<span class="added">added</span>/<span class="removed">removed</span>:<ul>
+                    <li class="changed">/includes/classes/split_page_results.php</li>
+                    <li class="added">/includes/init_includes/init_canonical.php</li>
+                    <li class="removed">/includes/init_includes/overrides/init_canonical.php</li>
+                    <li class="changed">/includes/templates/DEIN_TEMPLATE/templates/tpl_products_next_previous.php</li>
+                  </ul></li>
+                </ul></li>
+                <li>v1.4.9, 2014-07-13:<ul>
+                  <li>Include updates for Zen Cart v1.5.2 and v1.5.3 compatibility, changed:<ol>
+                    <li>includes/init_includes/overrides/init_canonical.php</li>
+                  </ol></li>
+                </ul></li>
+                <li>v1.4.8, 2014-05-30:<ul>
+                  <li>Verified Zen Cart v1.5.2 and v1.5.3 compatibility.</li>
+                  <li>BUGFIX: Item count dropdown should contain &quot;All&quot; if the total items' count is less than the maximum <em>Item Count</em> value.  Changed /includes/functions/extra_functions/products_pagination_functions.php.</li>
+                </ul></li>
+                <li>v1.4.7, 2013-09-19:<ul>
+                  <li>BUGFIX: Modified BUGFIX #2 from v1.4.6, needed to check that the $count_key value was other than '*' rather than numeric; was causing incorrect results on the products' listing and advanced-search results pages.  Changed /includes/classes/split_page_results.php.</li>
+                </ul></li>
+
+                <li>v1.4.6, 2012-12-02:<ul>
+                  <li>BUGFIX: Changing item-count or page-count on advanced_search_results pages resulted in main page being displayed.</li>
+                  <li>BUGFIX: Make sure that the count value is numeric before including DISTINCT in the MySQL count() directive.</li>
+                  <li>The following files were <span class="changed">changed</span>/<span class="added">added</span>:<ul>
+                    <li class="changed">/includes/classes/split_page_results.php</li>
+                    <li class="added">/includes/modules/DEIN_TEMPLATE/product_listing.php</li>
+                  </ul></li>
+                </ul></li>
+                <li>v1.4.5, 2012-11-21:<ul>
+                  <li>BUGFIX: Problems on product_listing and advanced_search_results pages when using multiple-add-to-cart feature.</li>
+                  <li>The following files were <span class="changed">changed</span>/<span class="added">added</span>:<ul>
+                    <li class="changed">/includes/classes/split_page_results.php</li>
+                    <li class="added">/includes/extra_cart_actions/pagination_actions.php</li>
+                    <li class="changed">/includes/init_includes/init_pagination.php</li>
+                    <li class="changed">/includes/functions/extra_functions/products_pagination_functions.php</li>
+                    <li class="changed">/includes/templates/DEIN_TEMPLATE/tpl_index_product_list.php</li>
+                  </ul></li>
+                </ul></li>
+                <li>v1.4.4, 2012-11-12: Changed /includes/classes/split_page_results.php and /includes/templates/DEIN_TEMPLATE/templates/tpl_modules_listing_display_order.php:<ul>
+                  <li>BUGFIX (yet again): Correct possible divide-by-0.</li>
+                </ul></li>
+                <li>v1.4.3, 2012-10-20: Changed /includes/classes/split_page_results.php and /includes/functions/extra_functions/products_pagination_functions.php:<ul>
+                  <li>BUGFIX: Links are displayed when zero items are returned.</li>
+                  <li>BUGFIX: Page-select dropdown is displayed even if only 1 page is active.</li>
+                  <li>BUGFIX: Item-count dropdown is displayed even if there are fewer items than the minimum to display.</li>
+                </ul></li>
+                <li>v1.4.2, 2012-10-03, Corrected possible divide-by-zero and sort/count reset issues on the advanced_search_result page.  The following files have been changed:<ul>
+                  <li>includes/classes/split_page_results.php</li>
+                  <li>includes/functions/extra_functions/products_pagination_functions.php</li>
+                  <li>includes/templates/DEIN_TEMPLATE/templates/tpl_modules_listing_display_order.php</li>
+                </ul></li>
+                <li>v1.4.1, 2012-09-23, Corrected problems where changing the sort-order or going next/previous would reset the items/page and resetting the items/page would reset the sort order.  The following files have been <span class="changed">changed</span>/<span class="added">added</span>:<ul>
+                  <li><span class="changed">/includes/classes/split_page_results.php</span></li>
+                  <li><span class="changed">/includes/functions/extra_functions/products_pagination_functions.php</span></li>
+                  <li><span class="added">/includes/init_includes/overrides/init_canonical.php</span></li>
+                  <li><span class="added">/includes/templates/DEIN_TEMPLATE/templates/tpl_index_product_list.php</span></li>
+                  <li><span class="added">/includes/templates/DEIN_TEMPLATE/templates/tpl_modules_listing_display_order.php</span></li>
+                </ul></li>
+                <li>v1.4.0, 2012-09-21:<ul>
+                  <li>Merged changes into v1.5.1 /includes/classes/split_page_results.php; the merged file supports v1.3.9 and v1.5.0 as well as v1.5.1.</li>
+                  <li>Updated htmlentities call for PHP v5.4+</li>
+                  <li>Corrected remaining HTML validation issue.</li>
+                </ul></li>
+                <li>v1.3.0, 2012-09-02, Added support for drop-down page choice and/or user-selectable number of items-per-page. <strong>Note:</strong> New configuration switches in your admin enable these features &mdash; you will need to re-run the SQL install script on an upgrade.</li>
+                <li>v1.2.2, 2012-05-16, Corrected HTML validation errors (/includes/classes/split_page_results.php, /includes/functions/extra_functions/products_pagination_functions.php and /includes/templates/DEIN_TEMPLATE/templates/tpl_products_next_previous.php).</li>
+                <li>v1.2.1, 2012-03-20, Corrected install SQL scripts to remove unwanted back-quotes around column and table names.</li>
+                <li>v1.2.0, 2012-03-01, Added support for all pages currently used by the split pages' results.  Consolidated the CSS into a single file.</li>
+                <li>v1.1.1, 2011-08-15, Updated 1.5.0+ install SQL to correct the problem described <a href="https://www.zen-cart.com/forum/showpost.php?p=993178&amp;postcount=9">here</a>.</li>
+                <li>v1.1.0, 2011-08-08, Updated install to support Zen Cart 1.5.0+ admin_pages.</li>
+                <li>v1.0.1, 2011-04-14, Added the product listing link feature; requires re-running the installation SQL if you want the link.</li>
+                <li>v1.0.0, 2010-11-30, Initial release.</li>
+              </ul>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script type="text/javascript">
+    $('#outer-container, #inner-container2, #inner-container3').easytabs();
+    
+    $( '.side-link' ).click( function() {
+        window.location.hash = $(this).attr( 'href' );
+        location.reload();
+    });
+  </script>
+
+</body>
+</html>
